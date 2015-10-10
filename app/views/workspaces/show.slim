@@ -1,0 +1,86 @@
+css:
+  html, body { height: 100%; margin: 0; padding: 0; }
+  #map { height: 100%; }
+
+h1= @workspace.name
+#user-geo-datas style="display: hidden;"
+  - @workspace.users.each do |user|
+    .geo-data lat=user.locations.last.latitude lng=user.locations.last.longitude user-name=user.name
+
+#map
+
+javascript:
+
+  var map;
+  function initMap() {
+    workspaceLoc = {lat: #{@workspace.location.latitude}, lng: #{@workspace.location.longitude} }
+
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: workspaceLoc,
+      zoom: 13
+    });
+
+    var marker = new google.maps.Marker({
+      position: workspaceLoc,
+      animation: google.maps.Animation.DROP,
+      map: map,
+      title: "#{@workspace.name}"
+    });
+
+    marker.addListener('click', toggleBounce);
+
+    function toggleBounce() {
+      if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+      } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+      }
+    }
+
+    var infowindow = new google.maps.InfoWindow({
+      content: "<h4>#{@workspace.name}</h4>"
+    });
+
+    infowindow.open(map, marker);
+
+    $.each($('#user-geo-datas .geo-data'), function(index, geodata){
+      var lat = Number($(geodata).attr('lat'));
+      var lng = Number($(geodata).attr('lng'));
+      var userName = $(geodata).attr('user-name');
+
+      userLoc = { lat: lat,lng: lng};
+
+      console.log(userLoc);
+
+      var marker = new google.maps.Marker({
+        position: userLoc,
+        map: map,
+        title: userName
+      });
+
+      var infowindow = new google.maps.InfoWindow({
+        content: "<h4>" + userName + "</h4>"
+      });
+
+      infowindow.open(map, marker);
+
+    })
+
+    // Number($('#user-geo-datas .geo-data').first().attr('lat'))
+
+    /*
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        centerLoc = {lat: position.coords.latitude, lng: position.coords.longitude}
+
+
+        console.log("" + position);
+      });
+    } else {
+      // x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+    */
+  }
+
+
+script{defer async src="https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}&callback=initMap"}

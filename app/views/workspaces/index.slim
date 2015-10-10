@@ -1,0 +1,6 @@
+.rows
+  .col-xs-12
+    h1 Knock the door
+    - @workspaces.each do |workspace|
+      a.workspace-block class="#{workspace.status}" href=workspace_path(workspace)
+        img src="http://placehold.it/400x300"
