@@ -1,6 +1,9 @@
-.rows
-  .col-xs-12
-    h1 Knock the door
-    - @workspaces.each do |workspace|
-      a.workspace-block class="#{workspace.status}" href=workspace_path(workspace)
-        img src="http://placehold.it/400x300"
+.center-block
+  h1 Pick one workspace
+  - @workspaces.each do |workspace|
+    .workspace-block class="#{workspace.status}"
+      a href=workspace_path(workspace)
+        / img.resize src="http://placehold.it/400x300"
+        .video-container
+          iframe style="display:inline !important;" width="400" height="300" src="https://www.youtube.com/embed/D3MLCYsXE0U" frameborder="0" allowfullscreen=""
+        h3= workspace.name

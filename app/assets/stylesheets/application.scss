@@ -16,3 +16,19 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+html,body { height: 100%; margin: 0px; padding: 0px; }
+
+body {
+  background-color: #353535;
+  color: #7CF76C;
+
+  a {
+    color: #7CF76C;
+    text-decoration: underline;
+
+    &:hover {
+      color: #B5F98E;
+    }
+  }
+}

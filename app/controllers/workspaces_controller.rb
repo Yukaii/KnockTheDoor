@@ -1,5 +1,5 @@
 class WorkspacesController < ApplicationController
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
 
   def index
     @workspaces = Workspace.all
@@ -17,6 +17,10 @@ class WorkspacesController < ApplicationController
       flash[:error] = "Workspace not found"
       redirect_to root_path
     end
+
+  end
+
+  def check_in
 
   end
 

@@ -16,7 +16,7 @@ namespace :dev do
     u1.workspaces << workspace
     u2.workspaces << workspace
 
-    u1.locations.create!(latitude: 37.8668, longitude: -122.2536)
+    u1.locations.create!(latitude: 37.8669, longitude: -122.2536)
     u2.locations.create!(latitude: 37.8667, longitude: -122.2535)
   end
 end

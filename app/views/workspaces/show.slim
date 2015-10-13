@@ -1,11 +1,10 @@
-css:
-  html, body { height: 100%; margin: 0; padding: 0; }
-  #map { height: 100%; }
-
-h1= @workspace.name
-#user-geo-datas style="display: hidden;"
-  - @workspace.users.each do |user|
-    .geo-data lat=user.locations.last.latitude lng=user.locations.last.longitude user-name=user.name
+.center-block
+  h1= @workspace.name
+  p status:
+  p ="#{@workspace.status}"
+  #user-geo-datas style="display: hidden;"
+    - @workspace.users.each do |user|
+      .geo-data lat=user.locations.last.latitude lng=user.locations.last.longitude user-name=user.name
 
 #map
 
@@ -17,7 +16,7 @@ javascript:
 
     map = new google.maps.Map(document.getElementById('map'), {
       center: workspaceLoc,
-      zoom: 13
+      zoom: 20
     });
 
     var marker = new google.maps.Marker({
@@ -49,8 +48,6 @@ javascript:
       var userName = $(geodata).attr('user-name');
 
       userLoc = { lat: lat,lng: lng};
-
-      console.log(userLoc);
 
       var marker = new google.maps.Marker({
         position: userLoc,

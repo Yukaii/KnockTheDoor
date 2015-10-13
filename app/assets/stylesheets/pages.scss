@@ -1,3 +1,22 @@
 // Place all the styles related to the pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.landing-poster {
+  background-image: url(knock-knock.jpg);
+  background-size: cover;
+  background-position: center;
+  max-width: 980px;
+  width: 100%;
+  margin: 0 auto;
+  height: 100%;
+}
+
+#button-section {
+  padding-top: 50%;
+  text-align: center;
+}
+
+.btn-big {
+  font-size: 20px;
+}

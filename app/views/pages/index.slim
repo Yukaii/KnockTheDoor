@@ -1,6 +1,7 @@
-.rows
-  .col-xs-12
-    h1 Knock the door
-    a href="/workspaces"
-      button.btn.btn-default type="button"
-        start monitoring
+.landing-poster
+  / h1 Knock the door
+  = link_to 'logout', destroy_user_session_path, method: :delete
+  #button-section
+    a href="#{current_user.present? ? "/workspaces" : user_omniauth_authorize_path(:facebook) }"
+      button.btn.btn-default type="button" class="btn-default #{current_user.present? ? nil : "btn-primary"}"
+        = "#{current_user.present? ? "See what's happening" : "Login with Facebook"}"
